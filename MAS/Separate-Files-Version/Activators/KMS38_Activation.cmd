@@ -457,13 +457,13 @@ set "_hash= "
 for /f "skip=1 tokens=* delims=" %%# in ('certutil -hashfile "!_work!\ClipUp.exe" SHA256^|findstr /i /v CertUtil') do set "_hash=%%#"
 set "_hash=!_hash: =!"
 
-if /i not "!_hash!"=="0D6E9F6BBD0321EDA149658D96040CB4F79E0BD93BA60061F25B28FECBF4D4EF" (
+if /i not "!_hash!"=="0d6e9f6bbd0321eda149658d96040cb4f79e0bd93ba60061f25b28fecbf4d4ef" (
 %eline%
 echo ClipUp.exe SHA256 hash mismatch found.
 echo The file may have gotten corrupted during download.
 echo:
 echo Detected: !_hash!
-echo Expected: 0D6E9F6BBD0321EDA149658D96040CB4F79E0BD93BA60061F25B28FECBF4D4EF
+echo Expected: 0d6e9f6bbd0321eda149658d96040cb4f79e0bd93ba60061f25b28fecbf4d4ef
 echo:
 set fixes=%fixes% %mas%troubleshoot
 call :dk_color2 %Blue% "Help - " %_Yellow% " %mas%troubleshoot"
