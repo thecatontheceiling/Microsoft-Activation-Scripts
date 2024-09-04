@@ -450,6 +450,27 @@ goto dk_done
 )
 )
 
+:: Verify ClipUp.exe file 
+
+if defined a_cor (
+set _hash=
+for /f "skip=1 tokens=* delims=" %%# in ('certutil -hashfile "!_work!\ClipUp.exe" SHA1^|findstr /i /v CertUtil') do set "_hash=%%#"
+set "_hash=%_hash: =%"
+
+if /i not "%_hash%"=="48D928B1BEC25A56FE896C430C2C034B7866AA7A" (
+%eline%
+echo ClipUp.exe SHA1 hash mismatch found.
+echo The file may have gotten corrupted during download.
+echo:
+echo Detected: %_hash%
+echo Expected: 48D928B1BEC25A56FE896C430C2C034B7866AA7A
+echo:
+set fixes=%fixes% %mas%troubleshoot
+call :dk_color2 %Blue% "Help - " %_Yellow% " %mas%troubleshoot"
+goto dk_done
+)
+)
+
 ::========================================================================================================================================
 
 set error=
