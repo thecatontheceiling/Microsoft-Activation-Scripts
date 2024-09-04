@@ -22,7 +22,7 @@ set _rem=0
 set _NoEditionChange=0
 
 ::  To run the script in debug mode, change 0 to "/KMS38" in below line
-set "_debug=/KMS38"
+set "_debug=0"
 
 ::  If value is changed in above lines or parameter is used then script will run in unattended mode
 
