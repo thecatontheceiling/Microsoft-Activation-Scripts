@@ -22,7 +22,7 @@ set _rem=0
 set _NoEditionChange=0
 
 ::  To run the script in debug mode, change 0 to "/KMS38" in below line
-set "_debug=0"
+set "_debug=/KMS38"
 
 ::  If value is changed in above lines or parameter is used then script will run in unattended mode
 
@@ -453,17 +453,17 @@ goto dk_done
 :: Verify ClipUp.exe file 
 
 if defined a_cor (
-set _hash=
-for /f "skip=1 tokens=* delims=" %%# in ('certutil -hashfile "!_work!\ClipUp.exe" SHA1^|findstr /i /v CertUtil') do set "_hash=%%#"
-set "_hash=%_hash: =%"
+set "_hash= "
+for /f "skip=1 tokens=* delims=" %%# in ('certutil -hashfile "!_work!\ClipUp.exe" SHA256^|findstr /i /v CertUtil') do set "_hash=%%#"
+set "_hash=!_hash: =!"
 
-if /i not "%_hash%"=="48D928B1BEC25A56FE896C430C2C034B7866AA7A" (
+if /i not "!_hash!"=="0D6E9F6BBD0321EDA149658D96040CB4F79E0BD93BA60061F25B28FECBF4D4EF" (
 %eline%
-echo ClipUp.exe SHA1 hash mismatch found.
+echo ClipUp.exe SHA256 hash mismatch found.
 echo The file may have gotten corrupted during download.
 echo:
-echo Detected: %_hash%
-echo Expected: 48D928B1BEC25A56FE896C430C2C034B7866AA7A
+echo Detected: !_hash!
+echo Expected: 0D6E9F6BBD0321EDA149658D96040CB4F79E0BD93BA60061F25B28FECBF4D4EF
 echo:
 set fixes=%fixes% %mas%troubleshoot
 call :dk_color2 %Blue% "Help - " %_Yellow% " %mas%troubleshoot"
